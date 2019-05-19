@@ -43,7 +43,9 @@ class _MyHomePageState extends State<MyHomePage> {
       list.add(Dismissible(
           key: (Key("Text$i")),
           onDismissed: (direction) {
-            list.removeWhere((item) => item.key == Key("Text$i"));
+            setState(() {
+              list.removeWhere((item) => item.key == Key("Text$i"));
+            });
           },
           background: Container(color: Color(0x444f63a2)),
           child: new SizedBox(
