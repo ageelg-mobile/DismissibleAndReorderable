@@ -1,16 +1,20 @@
 # reordereddismiss
 
-A new Flutter project.
+A new Flutter project, showing an issue with ReorderableListView giving a GlobalKey error when draging and dropping items.
+Applied solution from https://github.com/flutter/flutter/issues/21829. 
 
-## Getting Started
+To reproduce the error,
 
-This project is a starting point for a Flutter application.
+ onReorder(oldIndex, newIndex) {
+    if (newIndex > oldIndex) {
+      newIndex -= 1;
+    }
+    Future.delayed(Duration(milliseconds: 20), () {    //Comment to reproduce 
+      setState(() {
+        final Widget item = list.removeAt(oldIndex);
+        list.insert(newIndex, item);
+      });
+    });                                               //Comment to reproduce 
+  }
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
