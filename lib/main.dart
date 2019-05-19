@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+//A new Flutter project, showing an issue with ReorderableListView giving a GlobalKey error when draging and dropping items. 
+//Applied solution from https://github.com/flutter/flutter/issues/21829.
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -30,12 +33,12 @@ class _MyHomePageState extends State<MyHomePage> {
     if (newIndex > oldIndex) {
       newIndex -= 1;
     }
-    Future.delayed(Duration(milliseconds: 20), () {
+    Future.delayed(Duration(milliseconds: 20), () {   // Comment to reproduce issue
       setState(() {
         final Widget item = list.removeAt(oldIndex);
         list.insert(newIndex, item);
       });
-    });
+    });                                               // Comment to reproduce issue
   }
 
   buildList() {
